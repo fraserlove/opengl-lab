@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <iostream>
 
-Display::Display(int width, int height, const char* title) {
+Display::Display(int width, int height, const std::string title) {
 
     SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -16,9 +16,10 @@ Display::Display(int width, int height, const char* title) {
     // Hence window never displays something in the process of being drawn.
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
     glcontext = SDL_GL_CreateContext(window);
 
+    glewExperimental = GL_TRUE; // Fixed issue with GLEW when calling glGenVertexArrays. Driver/GLEW version specific issue
     GLenum status = glewInit();
 
     if (status != GLEW_OK)
@@ -35,6 +36,7 @@ Display::~Display() {
 }
 
 bool Display::IsClosed() {
+
     return isClosed;
 }
 
@@ -53,5 +55,5 @@ void Display::SwapBuffers() {
 void Display::Clear(float r, float g, float b, float a) {
 
     glClearColor(r, g, b, a);
-        glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
 }

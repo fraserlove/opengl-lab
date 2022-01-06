@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include <SDL2/SDL.h>
+#include <string>
 
 class Display {
 private:
@@ -11,7 +11,7 @@ private:
     bool isClosed;
 
 public:
-    Display(int width, int height, const char* title);
+    Display(int width, int height, const std::string title);
     virtual ~Display();
 
     void Clear(float r, float g, float b, float a);
