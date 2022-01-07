@@ -14,13 +14,8 @@ public:
         this->texCoord = texCoord;
     }
 
-    inline glm::vec3* GetPos() {
-        return &pos;
-    }
-
-    inline glm::vec2* GetTexCoord() {
-        return &texCoord;
-    }
+    inline glm::vec3* GetPos() { return &pos; }
+    inline glm::vec2* GetTexCoord() { return &texCoord; }
 };
 
 class Mesh {

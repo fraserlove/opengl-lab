@@ -21,6 +21,7 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices) {
     }
 
     glGenBuffers(NUM_BUFFERS, vertexArrayBuffers);
+    
     glBindBuffer(GL_ARRAY_BUFFER, vertexArrayBuffers[POSITION_VB]);
     glBufferData(GL_ARRAY_BUFFER, numVertices * sizeof(positions[0]), &positions[0], GL_STATIC_DRAW);
 
