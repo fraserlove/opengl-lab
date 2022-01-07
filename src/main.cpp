@@ -3,6 +3,7 @@
 #include "mesh.h"
 #include "texture.h"
 #include "transform.h"
+#include "camera.h"
 
 int main() {
 
@@ -13,6 +14,8 @@ int main() {
                           Vertex(glm::vec3(0.5, -0.5, 0), glm::vec2(1.0, 0.0)) };
     Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]));
     Texture texture("./res/texture.jpg");
+    glm::vec3 cameraPos = glm::vec3(0, 0, -3);
+    Camera camera(cameraPos, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
     Transform transform;
 
     float i = 0.0f;
@@ -20,13 +23,12 @@ int main() {
     while (!display.IsClosed()) {
         display.Clear(0.0f, 0.1f, 0.3f, 1.0f);
 
-        transform.SetPos(glm::vec3(sinf(i), 0, 0));
+        transform.SetPos(glm::vec3(sinf(i), 0, cosf(i)));
         transform.SetRot(glm::vec3(0, 0, i));
-        transform.SetScale(cosf(i));
 
         shader.Bind();
         texture.Bind(0);
-        shader.Update(transform);
+        shader.Update(transform, camera);
         mesh.Draw();
 
         display.SwapBuffers();

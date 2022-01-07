@@ -1,6 +1,7 @@
 #pragma once
 
 #include "transform.h"
+#include "camera.h"
 
 #include <GL/glew.h>
 #include <string>
@@ -23,5 +24,5 @@ public:
     virtual ~Shader();
 
     void Bind();
-    void Update(const Transform& transform);
+    void Update(const Transform& transform, const Camera& camera);
 };

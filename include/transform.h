@@ -11,11 +11,11 @@ private:
 
 public:
     Transform(const glm::vec3& pos = glm::vec3(0.0, 0.0, 0.0), const glm::vec3& rot = glm::vec3(0.0, 0.0, 0.0), const glm::vec3& scale = glm::vec3(1.0, 1.0, 1.0)) {
+       
         this->pos = pos;
         this->rot = rot;
         this->scale = scale;
     }
-    virtual ~Transform() { }
 
     inline glm::mat4 GetModel() const {
 

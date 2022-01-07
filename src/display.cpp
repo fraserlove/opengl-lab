@@ -26,6 +26,8 @@ Display::Display(int width, int height, const std::string title) {
         std::cerr << "Glew failed to initialise." << std::endl;
 
     isClosed = false;
+    this->width = width;
+    this->height = height;
 }
 
 Display::~Display() {
