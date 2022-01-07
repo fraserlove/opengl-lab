@@ -10,8 +10,8 @@ static GLuint CreateShader(const std::string& text, GLenum shaderType);
 Shader::Shader(const std::string& fileName) {
 
     program = glCreateProgram();
-    shaders[0] = CreateShader(LoadShader(fileName + ".vs"), GL_VERTEX_SHADER);
-    shaders[1] = CreateShader(LoadShader(fileName + ".fs"), GL_FRAGMENT_SHADER);
+    shaders[0] = CreateShader(LoadShader(fileName + ".vert"), GL_VERTEX_SHADER);
+    shaders[1] = CreateShader(LoadShader(fileName + ".frag"), GL_FRAGMENT_SHADER);
 
     for (unsigned int i = 0; i < NUM_SHADERS; i++)
         glAttachShader(program, shaders[i]);

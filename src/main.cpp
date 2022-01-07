@@ -8,7 +8,7 @@
 int main() {
 
     Display display(800, 600, "OpenGL Test");
-    Shader shader("./res/shader");
+    Shader shader("./res/shaders/shader");
 
     // Vertex vertices[] = { Vertex(glm::vec3(-0.5, -0.5, 0), glm::vec2(0.0, 0.0)),
     //                      Vertex(glm::vec3(0, 0.5, 0), glm::vec2(0.5, 1.0)),
@@ -18,9 +18,9 @@ int main() {
                           
     // Mesh mesh(vertices, sizeof(vertices) / sizeof(vertices[0]), indices, sizeof(indices) / sizeof(indices[0]));
 
-    Mesh mesh("./res/object.obj");
-    Texture texture("./res/texture.jpg");
-    
+    Mesh mesh("./res/models/object.obj");
+    Texture texture("./res/textures/texture.jpg");
+
     glm::vec3 cameraPos = glm::vec3(0, 0, -5);
     Camera camera(cameraPos, 70.0f, display.getAspectRatio(), 0.01f, 1000.0f);
     Transform transform;
