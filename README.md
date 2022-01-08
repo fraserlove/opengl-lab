@@ -15,14 +15,14 @@ A test object and texture are provided in the resources file, along with a basic
 #### MacOS
 ```
 brew install glew glm glfw sld2
-git clone https://github.com/jdah/minecraft-weekend.git
+git clone https://github.com/fraserlove/opengl-expr.git
 cd opengl-expr
 make
 ```
 
 #### Building from Source
 ```
-$ git clone --recurse-submodules https://github.com/jdah/minecraft-weekend.git
+$ git clone --recurse-submodules https://github.com/fraserlove/opengl-expr.git
 $ cd opengl-expr
 $ sudo make libs
 $ make
