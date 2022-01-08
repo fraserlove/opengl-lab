@@ -24,8 +24,8 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
 libs:
-	cd lib/glew/auto && make && cd .. && make install
-	cd lib/SDL && ./configure && make && make install
+	cd lib/glew/auto && make
+	cd lib/SDL && ./configure && make
 	cd lib/glfw && cmake . && make
 
 clean:
