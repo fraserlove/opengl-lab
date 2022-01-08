@@ -1,6 +1,6 @@
 #pragma once
 
-#include "obj_loader.h"
+#include <objloader.h>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
