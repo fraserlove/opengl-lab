@@ -1,12 +1,32 @@
-SRC_DIR = src
-BUILD_DIR = build/debug
 CC = g++
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
-OBJ_NAME = test
-INCLUDE_PATHS = -Iinclude
-LIBRARY_PATHS = -Llib
-COMPILER_FLAGS = -Wall -O0 -g
-LINKER_FLAGS = -lsdl2 -lGLEW -framework OpenGL
+CFLAGS = -Wall -g
 
-all:
-	$(CC) $(COMPILER_FLAGS) $(LINKER_FLAGS) $(INCLUDE_PATHS) $(LIBRARY_PATHS) $(SRC_FILES) -o $(BUILD_DIR)/$(OBJ_NAME)
+SRC = src
+BUILD_DIR = build
+BUILD_NAME = main
+OBJ = $(BUILD_DIR)/obj
+BIN = $(BUILD_DIR)/bin
+
+SRC_FILES = $(wildcard $(SRC)/*.cpp)
+OBJ_FILES = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SRC_FILES))
+
+INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
+LFLAGS = -lsdl2 -lGLEW -framework OpenGL
+
+all: libs main
+
+main: $(OBJ_FILES)
+	@mkdir -p $(BIN)
+	$(CC) $(LFLAGS) $(OBJ_FILES) -o $(BIN)/$(BUILD_NAME)
+
+$(OBJ)/%.o: $(SRC)/%.cpp
+	@mkdir -p $(OBJ)
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
+
+libs:
+	cd lib/glew/auto && make && cd .. && make install
+	cd lib/SDL && ./configure && make && make install
+	cd lib/glfw && cmake . && make
+
+clean:
+	$(RM) -r $(BUILD_DIR)
