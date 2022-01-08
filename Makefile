@@ -13,7 +13,7 @@ OBJ_FILES += lib/objloader/objloader.o
 
 INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
 # Dynamically linked libraries - locations when built using make libs
-LDLIBS = lib/glew/lib/libGLEW.dylib lib/glfw/src/libglfw3.a lib/SDL/build/.libs/libSDL2.dylib
+LDLIBS = lib/glew/lib/libGLEW.dylib lib/glfw/src/libglfw3.dylib lib/SDL/build/.libs/libSDL2.dylib
 
 UNAME_S = $(shell uname -s)
 
