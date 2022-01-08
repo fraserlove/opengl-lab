@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstring>
-ls
+
 static const std::string LoadShader(const std::string& fileName);
 static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMsg);
 static GLuint CreateShader(const std::string& text, GLenum shaderType);
