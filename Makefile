@@ -13,7 +13,7 @@ OBJ_FILES = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SRC_FILES))
 INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
 LFLAGS = -lsdl2 -lGLEW -framework OpenGL
 
-all: libs main
+all: main
 
 main: $(OBJ_FILES)
 	@mkdir -p $(BIN)
