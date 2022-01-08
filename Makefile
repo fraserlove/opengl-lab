@@ -12,17 +12,19 @@ OBJ_FILES = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SRC_FILES))
 OBJ_FILES += lib/objloader/objloader.o
 
 INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
-# Dynamically linked libraries - locations when built using make libs
-LDLIBS = lib/glew/lib/libGLEW.dylib lib/glfw/src/libglfw3.dylib lib/SDL/build/.libs/libSDL2.dylib
 
 UNAME_S = $(shell uname -s)
 
+# Dynamically linked libraries - locations when built using make libs
+LDLIBS = lib/glew/lib/libGLEW.so lib/glfw/src/libglfw3.so lib/SDL/build/.libs/libSDL2.so
+
 ifeq ($(UNAME_S), Linux)
-	LDLIBS +=
+	# pass
 endif
 
 ifeq ($(UNAME_S), Darwin)
-	LDLIBS += -framework OpenGL -framework Cocoa -framework CoreAudio -framework IOKit
+	# Dynamically linked libraries - locations when built using make libs
+	LDLIBS = lib/glew/lib/libGLEW.dylib lib/glfw/src/libglfw3.dylib lib/SDL/build/.libs/libSDL2.dylib
 endif
 
 all: main
@@ -36,8 +38,8 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
 libs:
-	cd lib/glew/auto && make && cd .. && make
-	cd lib/SDL && ./configure && make && make install
+	cd lib/glew/auto && make glew.lib && cd .. && make
+	cd lib/SDL && ./configure && make
 	cd lib/glfw && cmake . -D BUILD_SHARED_LIBS=ON && make
 	cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
 
