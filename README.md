@@ -14,7 +14,15 @@ A test object and texture are provided in the resources file, along with a basic
 
 #### MacOS
 ```
-brew install glew glm glfw sld2
+brew install glew glm glfw sdl2
+git clone https://github.com/fraserlove/opengl-expr.git
+cd opengl-expr
+make
+```
+
+#### Debian / Ubuntu
+```
+sudo apt install libglew-dev libglm-dev libglfw-dev livsdl2-dev
 git clone https://github.com/fraserlove/opengl-expr.git
 cd opengl-expr
 make
@@ -28,10 +36,12 @@ $ sudo make libs
 $ make
 ```
 
-The following static libraries under `lib/` must be built before the main project can be built:
- - SDL `lib/SDL/.libs/libSDL2.a`
- - GLFW `lib/glfw/src/libglfw3.a`
- - GLEW `lib/glew/lib/libGLEW.a`
+The following shared libraries under `lib/` must be built before the main project can be built:
+ - SDL `lib/SDL/build/.libs/libSDL2.dylib`
+ - GLFW `lib/glfw/src/libglfw3.dylib`
+ - GLEW `lib/glew/lib/libGLEW.dylib`
+
+ The binary, once built with `make` can be found in `./build/bin`
 
 OpenGL experimental code preview:
 

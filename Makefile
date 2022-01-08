@@ -12,18 +12,17 @@ OBJ_FILES = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SRC_FILES))
 OBJ_FILES += lib/objloader/objloader.o
 
 INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
-LDFLAGS =
+# Dynamically linked libraries - locations when built using make libs
+LDLIBS = lib/glew/lib/libGLEW.dylib lib/glfw/src/libglfw3.a lib/SDL/build/.libs/libSDL2.dylib
 
 UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S), Linux)
-		LDFLAGS += -Wl
-        LDLIBS += -Lusr/local/lib64 -Lusr/local/lib64 --enable-new-dtags -lSLD2 -lm -ldl -lpthread -lrt -lGLEW -lGL -lX11 -lGLU -lm -lGL -lglfw -lrt -lm -ldl
-    endif
+	LDLIBS +=
+endif
 
 ifeq ($(UNAME_S), Darwin)
-    LDFLAGS += 
-	LDLIBS += -lsdl2 -lGLEW -framework OpenGL
+	LDLIBS += -framework OpenGL -framework Cocoa -framework CoreAudio -framework IOKit
 endif
 
 all: main
@@ -37,9 +36,9 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
 libs:
-	cd lib/glew && make
+	cd lib/glew/auto && make && cd .. && make
 	cd lib/SDL && ./configure && make && make install
-	cd lib/glfw && cmake . && make
+	cd lib/glfw && cmake . -D BUILD_SHARED_LIBS=ON && make
 	cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
 
 clean:
