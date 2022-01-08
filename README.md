@@ -32,14 +32,14 @@ make
 ```
 $ git clone --recurse-submodules https://github.com/fraserlove/opengl-expr.git
 $ cd opengl-expr
-$ sudo make libs
+$ make libs
 $ make
 ```
 
 The following shared libraries under `lib/` must be built before the main project can be built:
- - SDL `lib/SDL/build/.libs/libSDL2.dylib`
- - GLFW `lib/glfw/src/libglfw3.dylib`
- - GLEW `lib/glew/lib/libGLEW.dylib`
+ - SDL `lib/SDL/build/.libs/libSDL2.so`
+ - GLFW `lib/glfw/src/libglfw.so`
+ - GLEW `lib/glew/lib/libGLEW.so`
 
  The binary, once built with `make` can be found in `./build/bin`
 
