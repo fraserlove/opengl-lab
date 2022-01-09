@@ -37,8 +37,7 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
 libs:
-	# cd lib/glew/auto && make && cd .. && make glew.lib.shared
-	cd lib/glew && make glew.lib.shared GLEW_DEST=lib/glew
+	cd lib/glew/auto && make && cd .. && make glew.lib.shared GLEW_DEST=lib/glew
 	cd lib/SDL && ./configure && make
 	cd lib/glfw && cmake . -D BUILD_SHARED_LIBS=ON && make
 	cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
