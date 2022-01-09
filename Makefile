@@ -16,7 +16,7 @@ INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/gle
 UNAME_S = $(shell uname -s)
 
 # Dynamically linked libraries - locations when built using make libs
-LDLIBS = -Llib/glew/lib/ -Llib/glfw/src/ -Llib/SDL/build/.libs/ -lGLEW -lglfw -lSDL2, -rpath = $(pwd)
+LDLIBS = -Llib/glew/lib/ -Llib/glfw/src/ -Llib/SDL/build/.libs/ -lGLEW -lglfw -lSDL2 -Wl,-rpath,../../
 
 ifeq ($(UNAME_S), Linux)
 	# pass
