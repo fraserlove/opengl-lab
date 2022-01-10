@@ -33,7 +33,7 @@ $ make
 $ git clone --recurse-submodules https://github.com/fraserlove/opengl-expr.git
 $ cd opengl-expr
 $ sudo make libs
-$ make
+$ sudo make
 ```
 
 The following shared libraries under `lib/` must be built before the main project can be built:

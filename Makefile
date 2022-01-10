@@ -13,17 +13,18 @@ OBJ_FILES = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SRC_FILES))
 OBJ_FILES += lib/objloader/objloader.o
 
 INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
+LIB_EXT = .so
 
 UNAME_S = $(shell uname -s)
 
-# Shared libraries locations when built using 'make libs'. (-L specifies location of libraries, -l is to link them to the binary)
-LDLIBS = -Llib/glew/build/lib/ -Llib/glfw/src/ -Llib/SDL/build/.libs/ -lGLEW -lglfw -lSDL2
-# Since libraries are compiled locally within the project the executable has to be told the location of the libraries
-LDLIBS += -Wl,-rpath,lib/glew/build/lib/ -Wl,-rpath,lib/glfw/src/ -Wl,-rpath,lib/SDL/build/.libs/
+#LDLIBS += -Wl,-rpath,lib/glew/lib/ -Wl,-rpath,lib/glfw/src/ -Wl,-rpath,lib/SDL/build/.libs/
+LDLIBS = -Lbuild/lib -lGLEW -lglfw -lSDL2
 
 
 ifeq ($(UNAME_S), Darwin)
-	LDLIBS += -framework OpenGL
+	LDLIBS += -framework OpenGL -Wl,-rpath,build/lib
+	# Showing the binary the location of the libraries
+	LIB_EXT = .dylib
 endif
 
 all: main
@@ -32,21 +33,11 @@ main: $(OBJ_FILES)
 	@mkdir -p $(BIN)
 	$(CC) $(LDFLAGS) $(OBJ_FILES) $(LDLIBS) -o $(BIN)/$(BUILD_NAME)
 
-	ifeq ($(UNAME_S), Darwin)
-		install_name_tool -id @rpath/libGLEW.dylib lib/glew/buildlib/libGLEW.dylib
-		install_name_tool -id @rpath/libglfw.dylib lib/glfw/src/libglfw.dylib
-		install_name_tool -id @rpath/libSDL2.dylib lib/SDL/build/.libs/libSDL2.dylib
-
-		mv lib/glew/build/lib/*.dylib build/lib && cd lib/glew && make clean
-		mv lib/glfw/src/*.dylib build/lib && cd lib/glfw && make clean
-		mv lib/SDL/build/.libs/*.dylib build/lib && cd lib/SDL && make clean
-	endif
-
-	ifeq ($(UNAME_S), Linux)
-		mv lib/glew/build/lib/*.dylib build/lib && cd lib/glew && make clean
-		mv lib/glfw/src/*.dylib build/lib && cd lib/glfw && make clean
-		mv lib/SDL/build/.libs/*.dylib build/lib && cd lib/SDL && make clean
-	endif
+ifeq ($(UNAME_S), Darwin)
+	install_name_tool -id @rpath/libGLEW.dylib build/lib/libGLEW.dylib
+	install_name_tool -id @rpath/libglfw.dylib build/lib/libglfw.dylib
+	install_name_tool -id @rpath/libSDL2.dylib build/lib/libSDL2.dylib
+endif
 
 $(OBJ)/%.o: $(SRC)/%.cpp
 	@mkdir -p $(OBJ)
@@ -54,10 +45,14 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 
 libs:
 	@mkdir -p $(LIB)
-	cd lib/glew/build && cmake ./cmake && make glew
+	cd lib/glew/auto && make && cd .. && make glew.lib.shared
 	cd lib/glfw && cmake . -D BUILD_SHARED_LIBS=ON && make
 	cd lib/SDL && ./configure --disable-static && make
 	cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
+
+	cp lib/glew/lib/*$(LIB_EXT) build/lib
+	cp lib/glfw/src/*$(LIB_EXT) build/lib
+	cp lib/SDL/build/.libs/*$(LIB_EXT) build/lib
 
 clean:
 	$(RM) -r $(BUILD_DIR)
