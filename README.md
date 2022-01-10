@@ -14,25 +14,25 @@ A test object and texture are provided in the resources file, along with a basic
 
 #### MacOS
 ```
-brew install glew glm glfw sdl2
-git clone https://github.com/fraserlove/opengl-expr.git
-cd opengl-expr
-make
+$ brew install glew glm glfw sdl2
+$ git clone https://github.com/fraserlove/opengl-expr.git
+$ cd opengl-expr
+$ make
 ```
 
 #### Debian / Ubuntu
 ```
-sudo apt install libglew-dev libglm-dev libglfw-dev livsdl2-dev
-git clone https://github.com/fraserlove/opengl-expr.git
-cd opengl-expr
-make
+$ sudo apt install libglew-dev libglm-dev libglfw-dev livsdl2-dev
+$ git clone https://github.com/fraserlove/opengl-expr.git
+$ cd opengl-expr
+$ make
 ```
 
 #### Building from Source
 ```
 $ git clone --recurse-submodules https://github.com/fraserlove/opengl-expr.git
 $ cd opengl-expr
-$ make libs
+$ sudo make libs
 $ make
 ```
 
