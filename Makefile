@@ -12,7 +12,6 @@ SRC_FILES = $(wildcard $(SRC)/*.cpp)
 OBJ_FILES = $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SRC_FILES))
 OBJ_FILES += lib/objloader/objloader.o
 
-INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
 LIB_EXT = .so
 
 UNAME_S = $(shell uname -s)
@@ -39,6 +38,10 @@ ifeq ($(UNAME_S), Darwin)
 	install_name_tool -id @rpath/libSDL2.dylib lib/SDL/build/.libs/libSDL2.dylib
 endif
 
+ifeq ($(UNAME_S), Linux)
+	LDLIBS += -lGL
+endif
+
 $(OBJ)/%.o: $(SRC)/%.cpp
 	@mkdir -p $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
@@ -48,6 +51,7 @@ libs:
 	cd lib/glfw && cmake . -D BUILD_SHARED_LIBS=ON && make
 	cd lib/SDL && ./configure --disable-static && make
 	cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
+	INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
 
 clean:
 	$(RM) -r $(BUILD_DIR)

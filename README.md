@@ -22,7 +22,7 @@ $ make
 
 #### Debian / Ubuntu
 ```
-$ sudo apt install libglew-dev libglm-dev libglfw-dev livsdl2-dev
+$ sudo apt install libglew-dev libglm-dev libglfw3-dev libsdl2-dev
 $ git clone https://github.com/fraserlove/opengl-expr.git
 $ cd opengl-expr
 $ make
