@@ -46,11 +46,12 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 	@mkdir -p $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
 
+cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
+
 libs:
 	cd lib/glew/auto && make && cd .. && make glew.lib.shared
 	cd lib/glfw && cmake . -D BUILD_SHARED_LIBS=ON && make
 	cd lib/SDL && ./configure --disable-static && make
-	cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
 	INCLUDE_PATHS = -Ilib/stb -Ilib/objloader -Ilib/glm -Ilib/glfw/include -Ilib/glew/include -Ilib/SDL/include
 
 clean:
