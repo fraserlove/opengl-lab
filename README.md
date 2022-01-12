@@ -1,5 +1,8 @@
 # OpenGL Experiments
-Features experimental code using OpenGL via GLEW, GLM, SDL2 and GLFW to test basic aspects of OpenGL and shading via glsl. The test code currently features:
+Features experimental code using OpenGL via GLEW, GLM, SDL2 and GLFW to test basic aspects of OpenGL and shading via glsl. 
+
+### Features and Information
+The test code currently features:
   - Window creation
   - Shader compilation
   - Mesh creation (hard coaded vertices or .obj file loading)
@@ -11,6 +14,10 @@ Features experimental code using OpenGL via GLEW, GLM, SDL2 and GLFW to test bas
 A test object and texture are provided in the resources file, along with a basic vertex and fragment shader.
 
 ### Install Guide
+
+It is recommended to follow the installation for your specific platform, building from source is not recommended. Windows installation is not currently supported.
+
+The binary, once built with `make` can be found in `./build/bin`
 
 #### MacOS
 ```
@@ -29,11 +36,12 @@ $ make
 ```
 
 #### Building from Source
+Not recommended as not maintained regularly. For best support use pacakges above. This installs SDL, GLFW and GLEW under the `libs` folder and not on the users system. Hence no dependencies have to be uninstalled after you are done with the application.
 ```
 $ git clone --recurse-submodules https://github.com/fraserlove/opengl-expr.git
 $ cd opengl-expr
 $ sudo make libs
-$ sudo make
+$ make
 ```
 
 The following shared libraries under `lib/` must be built before the main project can be built:
@@ -41,8 +49,7 @@ The following shared libraries under `lib/` must be built before the main projec
  - GLFW `lib/glfw/src/libglfw.so`
  - GLEW `lib/glew/lib/libGLEW.so`
 
- The binary, once built with `make` can be found in `./build/bin`
-
+### Screenshot
 OpenGL experimental code preview:
 
 ![Experimental code preview](https://i.imgur.com/0Regwp5.png)
