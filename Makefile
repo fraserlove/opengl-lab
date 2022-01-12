@@ -45,8 +45,7 @@ endif
 $(OBJ)/%.o: $(SRC)/%.cpp
 	@mkdir -p $(OBJ)
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c $< -o $@
-
-cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
+	cd lib/objloader && $(CC) -I../glm -o objloader.o -c objloader.cpp
 
 libs:
 	cd lib/glew/auto && make && cd .. && make glew.lib.shared
