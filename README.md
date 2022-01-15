@@ -1,5 +1,5 @@
 # OpenGL Experiments
-Features experimental code using OpenGL via GLEW, GLM, SDL2 and GLFW to test basic aspects of OpenGL and shading via glsl. Currently displays a single rotating object in a window.
+Experimental code using OpenGL via GLEW, GLM, SDL2 and GLFW to test basic aspects of OpenGL and shading via glsl. Currently displays a single rotating object in a window.
 
 ### Features and Information
   - Window creation
