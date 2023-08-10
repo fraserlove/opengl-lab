@@ -1,4 +1,4 @@
-# OpenGL Experiments
+# OpenGL Lab
 Experimental code using OpenGL via GLEW, GLM, SDL2 and GLFW to test basic aspects of OpenGL and shading via glsl. Currently displays a single rotating object in a window.
 
 ### Features and Information
@@ -21,24 +21,24 @@ The binary, once built with `make` can be found in `./build/bin`
 #### MacOS
 ```
 $ brew install glew glm glfw sdl2
-$ git clone https://github.com/fraserlove/opengl-expr.git
-$ cd opengl-expr
+$ git clone https://github.com/fraserlove/opengl-lab.git
+$ cd opengl-lab
 $ make
 ```
 
 #### Debian / Ubuntu
 ```
 $ sudo apt install libglew-dev libglm-dev libglfw3-dev libsdl2-dev
-$ git clone https://github.com/fraserlove/opengl-expr.git
-$ cd opengl-expr
+$ git clone https://github.com/fraserlove/opengl-lab.git
+$ cd opengl-lab
 $ make
 ```
 
 #### Building from Source
 Not recommended as not maintained regularly. For best support use pacakges above. This installs SDL, GLFW and GLEW under the `libs` folder and not on the users system. Hence no dependencies have to be uninstalled after you are done with the application.
 ```
-$ git clone --recurse-submodules https://github.com/fraserlove/opengl-expr.git
-$ cd opengl-expr
+$ git clone --recurse-submodules https://github.com/fraserlove/opengl-lab.git
+$ cd opengl-lab
 $ sudo make libs
 $ make
 ```
