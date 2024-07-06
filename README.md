@@ -51,4 +51,4 @@ The following shared libraries under `lib/` must be built before the main projec
 ## Screenshot
 OpenGL experimental code preview:
 
-![Experimental code preview](https://i.imgur.com/0Regwp5.png)
+![](assets/example.png)
